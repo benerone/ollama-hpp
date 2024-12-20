@@ -1,3 +1,6 @@
 .vscode
 cpp-httplib
 json
+build
+cmake-build-debug
+.idea

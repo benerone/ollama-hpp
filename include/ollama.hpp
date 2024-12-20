@@ -347,8 +347,8 @@ namespace ollama
                 return type;
             }
 
-            //operator std::string() const { return this->as_simple_string(); }
-            operator std::__cxx11::basic_string<char>() const { return this->as_simple_string(); }
+            operator std::string() const { return this->as_simple_string(); }
+            //operator std::__cxx11::basic_string<char>() const { return this->as_simple_string(); }
             //const operator std::string() const { return this->as_simple_string(); }           
 
 
@@ -455,7 +455,7 @@ class Ollama
                 partial_responses->clear();  
                 on_receive_token(response); 
             }
-            catch (const ollama::invalid_json_exception& e) { /* Partial response was received. Will do nothing and attempt to concatenate with the next response. */ }
+            catch (const ollama::invalid_json_exception& ) { /* Partial response was received. Will do nothing and attempt to concatenate with the next response. */ }
             
             return true;
         };
@@ -529,7 +529,7 @@ class Ollama
                 if ( response.has_error() ) { if (ollama::use_exceptions) throw ollama::exception("Ollama response returned error: "+response.get_error() ); }
                 on_receive_token(response);
             }
-            catch (const ollama::invalid_json_exception& e) { /* Partial response was received. Will do nothing and attempt to concatenate with the next response. */ }
+            catch (const ollama::invalid_json_exception& ) { /* Partial response was received. Will do nothing and attempt to concatenate with the next response. */ }
 
             return true;
         };
